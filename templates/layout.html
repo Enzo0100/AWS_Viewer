@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="/static/icons/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://unpkg.com/vis-network/styles/vis-network.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">General Infrastructure</a></li>
+                <li><a href="{{ url_for('s3') }}">S3 Buckets</a></li>
+                <li><a href="{{ url_for('ec2') }}">EC2 Instances</a></li>
+                <li><a href="{{ url_for('all_resources') }}">All Resources</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Details</h2>
+            <div id="modalDetails"></div>
+        </div>
+    </div>
+    <div id="modalBackdrop" class="modal-backdrop"></div>
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

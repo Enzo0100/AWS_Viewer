@@ -1,0 +1,150 @@
+{% extends "layout.html" %}
+
+{% block title %}All AWS Resources{% endblock %}
+
+{% block content %}
+<h1>All AWS Resources</h1>
+<div class="resource-container">
+    <h2>VPCs</h2>
+    <table class="resource-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>State</th>
+                <th>CIDR Block</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vpc in resources.VPCs %}
+            <tr>
+                <td>{{ vpc.VpcId }}</td>
+                <td>{{ vpc.State }}</td>
+                <td>{{ vpc.CidrBlock }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Subnets</h2>
+    <table class="resource-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>VPC ID</th>
+                <th>State</th>
+                <th>CIDR Block</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for subnet in resources.Subnets %}
+            <tr>
+                <td>{{ subnet.SubnetId }}</td>
+                <td>{{ subnet.VpcId }}</td>
+                <td>{{ subnet.State }}</td>
+                <td>{{ subnet.CidrBlock }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>RDS Instances</h2>
+    <table class="resource-table">
+        <thead>
+            <tr>
+                <th>Instance Identifier</th>
+                <th>Class</th>
+                <th>Engine</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rds in resources['RDS Instances'] %}
+            <tr>
+                <td>{{ rds.DBInstanceIdentifier }}</td>
+                <td>{{ rds.DBInstanceClass }}</td>
+                <td>{{ rds.Engine }}</td>
+                <td>{{ rds.DBInstanceStatus }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Redis Clusters</h2>
+    <table class="resource-table">
+        <thead>
+            <tr>
+                <th>Cluster ID</th>
+                <th>Engine</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cluster in resources['Redis Clusters'] %}
+            <tr>
+                <td>{{ cluster.CacheClusterId }}</td>
+                <td>{{ cluster.Engine }}</td>
+                <td>{{ cluster.CacheClusterStatus }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>RabbitMQ Brokers</h2>
+    <table class="resource-table">
+        <thead>
+            <tr>
+                <th>Broker ID</th>
+                <th>Name</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for broker in resources['RabbitMQ Brokers'] %}
+            <tr>
+                <td>{{ broker.BrokerId }}</td>
+                <td>{{ broker.BrokerName }}</td>
+                <td>{{ broker.BrokerState }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>EC2 Instances</h2>
+    <table class="resource-table">
+        <thead>
+            <tr>
+                <th>Instance ID</th>
+                <th>Instance Type</th>
+                <th>State</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for instance in resources['EC2 Instances'] %}
+            <tr>
+                <td>{{ instance.InstanceId }}</td>
+                <td>{{ instance.InstanceType }}</td>
+                <td>{{ instance.State.Name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>S3 Buckets</h2>
+    <table class="resource-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Creation Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bucket in resources['S3 Buckets'] %}
+            <tr>
+                <td>{{ bucket.Name }}</td>
+                <td>{{ bucket.CreationDate }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
